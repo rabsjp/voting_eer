@@ -66,6 +66,7 @@ replace bfv=playerbid-65 if groupcosto==35 & grouppolicy==1
 
 
 **Spearman coefficients: assortative discussion***
+**See p.29-30 of manuscript
 preserve
 keep if groupcosto<60 & mod(marca, 2) == 0
 bysort groupuniforme: spearman playerbid playerlama
@@ -101,9 +102,10 @@ esttab m1 m2 m3 using "table_4.tex", replace ///
                pivo_pass_none "Held None $\times$ Pivotal" ///
                pivo_reject_none "Held None $\times$ Pivotal") ///
     stats(N r2_o, labels("Obs." "$R^2$") fmt(0 2)) ///   // Overall R2 to match your output
-    booktabs gap ///                                     // Adds the [1em] vertical layout spacing
+    booktabs gap ///                                     // Adds the [1em] vertical 
+
 restore
-*fragments     
+  
 
 
 g held_none_tarde = held_none*tarde
@@ -138,7 +140,7 @@ g grandes_justas_tarde= grandes_tarde*alasjustas_lag
 g grandes_justas= grandes*alasjustas_lag 
 
 
-**TABLE 
+**TABLE B3
 preserve 
 keep if groupcosto<60 
 

@@ -50,12 +50,12 @@ write.csv(d,"data_to_stata.csv")
 full_data<-full_data[!(full_data$session.code=="49mqxl65" & full_data$subsession.round_number==9),]
 
 ##Table 1
-length(unique(full_data$unique_subject[full_data$group.uniforme==0]))
-length(unique(full_data$unique_subject[full_data$group.uniforme==1]))
-length(unique(full_data$session.code[full_data$group.uniforme==0]))
-length(unique(full_data$session.code[full_data$group.uniforme==1]))
+pol_s<-length(unique(full_data$unique_subject[full_data$group.uniforme==0]))
+dis_s<-length(unique(full_data$unique_subject[full_data$group.uniforme==1]))
+dis_ses<-length(unique(full_data$session.code[full_data$group.uniforme==0]))
+pol_ses<-length(unique(full_data$session.code[full_data$group.uniforme==1]))
+xtable(rbind(c(pol_s,pol_ses),c(dis_s,dis_ses)))
 #End of Table 1 
-
 
 
 #full_data_late<-full_data
@@ -341,15 +341,14 @@ dplayer_median <- full_data_late %>%
 #p-values for Result 5 
 player_high_20_0<-dplayer_median%>%filter(group.uniforme==0,group.costo==20,player.lama==0)
 player_high_35_0<-dplayer_median%>%filter(group.uniforme==0,group.costo==35,player.lama==0)
-wilcox.test(player_high_20_0$player.bid-player_high_35_0$player.bid)
 
 player_high_20<-dplayer_median%>%filter(group.uniforme==0,group.costo==20,player.lama==1)
 player_high_35<-dplayer_median%>%filter(group.uniforme==0,group.costo==35,player.lama==1)
-wilcox.test(player_high_20$player.bid,player_high_35$player.bid,paired=T)
 
-wilcox.test(player_high_20$player.bid,player_high_20_0$player.bid[player_high_20_0$player.id_in_group!=6],paired=T)
 
-wilcox.test(player_high_35$player.bid,player_high_35_0$player.bid[player_high_35_0$player.id_in_group!=6],paired=T)
+wilcox.test(player_high_20_0$player.bid-player_high_20$player.bid)
+
+wilcox.test(player_high_35_0$player.bid-player_high_35$player.bid)
 
 #End of p-values for Result 5 
 
